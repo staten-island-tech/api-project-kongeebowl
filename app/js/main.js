@@ -17,3 +17,72 @@ async function getData() {
 }
 
 getData();
+
+function addCards(data) {
+  const apiData = data.data;
+
+  apiData.forEach((Weapon) => {
+    const cost = Weapon.shopData ? Weapon.shopData.cost : "N/A";
+    DOMselectors.container.insertAdjacentHTML(
+      "beforeend",
+      `
+        <div class="card w-96 bg-base-100 shadow-xl p-4 m-4 rounded-xl border-2 border-black">
+            <h2 class="card-title">${Weapon.displayName}</h2>
+            <img src="${Weapon.displayIcon}" alt="${Weapon.displayName}" class="object-contain w-full h-48" />
+            <p>Cost: ${cost}</p>
+          </div>
+        </div>
+      `
+    );
+  });
+}
+
+function clear() {
+  DOMSelectors.box.innerHTML = "";
+}
+
+function sortGnomes(trait, minimum) {
+  return gnomes
+    .filter((gnome) => gnome[trait] >= minimum)
+    .sort((a, b) => b[trait] - a[trait]);
+}
+
+function gnomeCards(filteredGnomes) {
+  clear();
+  filteredGnomes.forEach((gnome) => addCards(gnome));
+}
+
+function displayCards() {
+  gnomeCards(gnomes);
+
+  DOMSelectors.allGnomes.addEventListener("click", (event) => {
+    event.preventDefault();
+    gnomeCards(gnomes);
+  });
+
+  DOMSelectors.rizzButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const rizzLords = sortGnomes("rizz", 8);
+    gnomeCards(rizzLords);
+  });
+
+  DOMSelectors.hotnessButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const looksmaxxer = sortGnomes("looks", 8);
+    gnomeCards(looksmaxxer);
+  });
+
+  DOMSelectors.wizButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const wizard = sortGnomes("magic", 8);
+    gnomeCards(wizard);
+  });
+
+  DOMSelectors.swolButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const beachBum = sortGnomes("strength", 9);
+    gnomeCards(beachBum);
+  });
+}
+
+displayCards();
