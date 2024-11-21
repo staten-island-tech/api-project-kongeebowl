@@ -1,18 +1,21 @@
 import "../css/style.css";
+import { DOMSelectors } from "./dom";
+
 async function getData() {
   try {
     const response = await fetch(
-      "https://botw-compendium.herokuapp.com/api/v3/compendium/entry/all"
+      "https://botw-compendium.herokuapp.com/api/v3/compendium/all"
     );
     if (response.status != 200) {
       throw new Error(response);
     } else {
       const data = await response.json();
       document.querySelector("h1").textContent = data.data.name;
+      addCards(data);
     }
   } catch (error) {
     console.log(error);
-    console.log("Sorry could not find that pocket monster");
+    console.log("big fat error dzsljnc");
   }
 }
 
@@ -21,23 +24,21 @@ getData();
 function addCards(data) {
   const apiData = data.data;
 
-  apiData.forEach((Weapon) => {
-    const cost = Weapon.shopData ? Weapon.shopData.cost : "N/A";
-    DOMselectors.container.insertAdjacentHTML(
+  apiData.forEach((equipment) => {
+    DOMSelectors.box.insertAdjacentHTML(
       "beforeend",
       `
-        <div class="card w-96 bg-base-100 shadow-xl p-4 m-4 rounded-xl border-2 border-black">
-            <h2 class="card-title">${Weapon.displayName}</h2>
-            <img src="${Weapon.displayIcon}" alt="${Weapon.displayName}" class="object-contain w-full h-48" />
-            <p>Cost: ${cost}</p>
+      <div class="card w-1/5 h-[17vw] bg-blue-500 rounded-3xl flex flex-col items-center justify-evenly m-8 border-2 border-black">
+            <h2 class="card-title">${equipment.name}</h2>
+            <img src="${equipment.image}" alt="${equipment.description}" class="object-contain w-full h-48" />
           </div>
-        </div>
+       
       `
     );
   });
 }
 
-function clear() {
+/* function clear() {
   DOMSelectors.box.innerHTML = "";
 }
 
@@ -86,3 +87,4 @@ function displayCards() {
 }
 
 displayCards();
+ */
