@@ -10,7 +10,6 @@ async function getData() {
       throw new Error(response);
     } else {
       const data = await response.json();
-      document.querySelector("h1").textContent = data.data.name;
       addCards(data);
     }
   } catch (error) {
@@ -24,18 +23,33 @@ getData();
 function addCards(data) {
   const apiData = data.data;
 
-  apiData.forEach((equipment) => {
-    DOMSelectors.box.insertAdjacentHTML(
-      "beforeend",
-      `
-      <div class="card w-1/5 h-[17vw] bg-blue-500 rounded-3xl flex flex-col items-center justify-evenly m-8 border-2 border-black">
-            <h2 class="card-title">${equipment.name}</h2>
-            <img src="${equipment.image}" alt="${equipment.description}" class="object-contain w-full h-48" />
+  apiData
+    .sort((a, b) => a.id - b.id)
+    .forEach((obj) => {
+      DOMSelectors.box.insertAdjacentHTML(
+        "beforeend",
+        `
+      <div class="card w-1/5 h-[17vw] bg-blue-500 rounded-3xl flex flex-col items-center justify-around m-8 border-2 border-black font-hylia text-xl">
+            <h2 class="card-title">${obj.name}</h2>
+            <img src="${obj.image}" alt="${obj.description}" class="object-contain w-full h-48" />
+            <p class="text-base">${obj.id}</p>
+            <button class="bg-white rounded-xl w-[6vw] border-black border-2">Read More</button>
           </div>
        
       `
-    );
-  });
+      );
+    });
+}
+
+function cards(filteredCards) {
+  clear();
+  filteredCards.sort((a, b) => a.id - b.id).forEach((card) => addCards(card));
+}
+
+function sortCards() {}
+
+function clear() {
+  DOMSelectors.box.innerHTML = "";
 }
 
 /* function clear() {
@@ -48,10 +62,7 @@ function sortGnomes(trait, minimum) {
     .sort((a, b) => b[trait] - a[trait]);
 }
 
-function gnomeCards(filteredGnomes) {
-  clear();
-  filteredGnomes.forEach((gnome) => addCards(gnome));
-}
+
 
 function displayCards() {
   gnomeCards(gnomes);
