@@ -11,6 +11,7 @@ async function getData() {
     } else {
       const data = await response.json();
       addCards(data);
+      infoCard(data);
     }
   } catch (error) {
     console.log(error);
@@ -29,11 +30,11 @@ function addCards(data) {
       DOMSelectors.box.insertAdjacentHTML(
         "beforeend",
         `
-      <div class="card w-1/5 h-[17vw] bg-blue-500 rounded-3xl flex flex-col items-center justify-around m-8 border-2 border-black font-hylia text-xl">
-            <h2 class="card-title">${obj.name}</h2>
+      <div class="card w-1/5 h-[17vw] bg-[#150709] rounded-3xl flex flex-col items-center justify-around m-8 border-2 border-[#e0d1ad] font-hylia">
+            <h2 class="card-title text-2xl text-[#e0d1ad]">${obj.name}</h2>
             <img src="${obj.image}" alt="${obj.description}" class="object-contain w-full h-48" />
-            <p class="text-base">${obj.id}</p>
-            <button class="bg-white rounded-xl w-[6vw] border-black border-2">Read More</button>
+            <p class="text-base text-[#87a4b4]">${obj.id}</p>
+            <button class="read-more-btn text-black bg-white rounded-xl w-[6vw] border-black border-2 transition-transform duration-300 hover:scale-110" id="${obj.id}">Read More</button>
           </div>
        
       `
@@ -41,61 +42,34 @@ function addCards(data) {
     });
 }
 
-function cards(filteredCards) {
-  clear();
-  filteredCards.sort((a, b) => a.id - b.id).forEach((card) => addCards(card));
-}
-
-function sortCards() {}
-
 function clear() {
   DOMSelectors.box.innerHTML = "";
 }
 
-/* function clear() {
-  DOMSelectors.box.innerHTML = "";
-}
-
-function sortGnomes(trait, minimum) {
-  return gnomes
-    .filter((gnome) => gnome[trait] >= minimum)
-    .sort((a, b) => b[trait] - a[trait]);
-}
-
-
-
-function displayCards() {
-  gnomeCards(gnomes);
-
-  DOMSelectors.allGnomes.addEventListener("click", (event) => {
+function infoCard(data) {
+  const apiData = data.data;
+  DOMSelectors.box.addEventListener("click", (event) => {
     event.preventDefault();
-    gnomeCards(gnomes);
-  });
+    const selectedItem = apiData.find((item) => item.id === apiData.id);
+    if (selectedItem) {
+      clear();
+      DOMSelectors.box.insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="info-card w-3/4 mx-auto bg-[#150709] text-[#e0d1ad] rounded-3xl p-8 border-2 border-[#e0d1ad] font-hylia">
+            <h2 class="text-3xl text-center mb-4">${selectedItem.name}</h2>
+            <img src="${selectedItem.image}" alt="${selectedItem.description}" class="object-contain w-full h-72 mx-auto mb-4" />
+            <p class="text-lg">${selectedItem.description}</p>
+            <button class="go-back-btn text-black bg-white rounded-xl mt-6 px-6 py-2 border-black border-2 transition-transform duration-300 hover:scale-110">Go Back</button>
+          </div>
+          `
+      );
 
-  DOMSelectors.rizzButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const rizzLords = sortGnomes("rizz", 8);
-    gnomeCards(rizzLords);
-  });
-
-  DOMSelectors.hotnessButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const looksmaxxer = sortGnomes("looks", 8);
-    gnomeCards(looksmaxxer);
-  });
-
-  DOMSelectors.wizButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const wizard = sortGnomes("magic", 8);
-    gnomeCards(wizard);
-  });
-
-  DOMSelectors.swolButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const beachBum = sortGnomes("strength", 9);
-    gnomeCards(beachBum);
+      document.querySelector(".go-back-btn").addEventListener("click", () => {
+        clear();
+        addCards(data);
+        infoCard(data);
+      });
+    }
   });
 }
-
-displayCards();
- */

@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        hylia: ["Hylia Serif", "serif"],
+        hylia: ["HyliaSerif", "sans-serif"],
+      },
+      backgroundImage: {
+        "sheikah-slate": "url('/img/backgroundsheikahslate.jpg')",
+        "texture-img": "url('/img/thingy.jpeg')",
       },
     },
   },
