@@ -1,6 +1,6 @@
 const DOMSelectors = {
   box: document.querySelector(".container"),
-  button: document.getElementById("btn"),
+  readMoreButton: document.querySelector(".read-more-btn"),
 };
 
 export { DOMSelectors };

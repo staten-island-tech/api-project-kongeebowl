@@ -50,7 +50,7 @@ function infoCard(data) {
   const apiData = data.data;
   DOMSelectors.box.addEventListener("click", (event) => {
     event.preventDefault();
-    const selectedItem = apiData.find((item) => item.id === apiData.id);
+    const selectedItem = apiData.find((item) => item.id == event.target.id);
     if (selectedItem) {
       clear();
       DOMSelectors.box.insertAdjacentHTML(
@@ -60,7 +60,7 @@ function infoCard(data) {
             <h2 class="text-3xl text-center mb-4">${selectedItem.name}</h2>
             <img src="${selectedItem.image}" alt="${selectedItem.description}" class="object-contain w-full h-72 mx-auto mb-4" />
             <p class="text-lg">${selectedItem.description}</p>
-            <button class="go-back-btn text-black bg-white rounded-xl mt-6 px-6 py-2 border-black border-2 transition-transform duration-300 hover:scale-110">Go Back</button>
+            <button class="go-back-btn text-black bg-white rounded-xl border-black border-2 transition-transform duration-300 hover:scale-110">Go Back</button>
           </div>
           `
       );
