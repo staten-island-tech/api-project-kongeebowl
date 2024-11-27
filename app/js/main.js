@@ -34,7 +34,7 @@ function addCards(data) {
             <h2 class="card-title text-2xl text-[#e0d1ad]">${obj.name}</h2>
             <img src="${obj.image}" alt="${obj.description}" class="object-contain w-full h-48" />
             <p class="text-base text-[#87a4b4]">${obj.id}</p>
-            <button class="read-more-btn text-black bg-white rounded-xl w-[6vw] border-black border-2 transition-transform duration-300 hover:scale-110" id="${obj.id}">Read More</button>
+            <button class="text-black bg-white rounded-xl w-[6vw] border-black border-2 transition-transform duration-300 hover:scale-110" id="${obj.id}">Read More</button>
           </div>
        
       `
@@ -56,8 +56,8 @@ function infoCard(data) {
       DOMSelectors.box.insertAdjacentHTML(
         "beforeend",
         `
-          <div class="info-card w-[45vw] mx-auto bg-[#150709] text-[#e0d1ad] rounded-3xl p-8 border-2 border-[#e0d1ad] font-hylia">
-            <h2 class="text-3xl text-center mb-4">${selectedItem.name}</h2>
+          <div class="card w-[40%] mx-auto bg-[#150709] text-[#e0d1ad] rounded-3xl p-8 border-2 border-[#e0d1ad] font-hylia">
+            <h2 class="text-3xl text-center">${selectedItem.name}</h2>
             <img src="${selectedItem.image}" alt="${selectedItem.description}" class="object-contain w-[90%]" />
             <p class="text-lg">${selectedItem.description}</p>
             <button class="go-back-btn text-black bg-white rounded-xl w-[4vw] border-black border-2 transition-transform duration-300 hover:scale-110">Go Back</button>
