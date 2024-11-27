@@ -56,11 +56,11 @@ function infoCard(data) {
       DOMSelectors.box.insertAdjacentHTML(
         "beforeend",
         `
-          <div class="info-card w-3/4 mx-auto bg-[#150709] text-[#e0d1ad] rounded-3xl p-8 border-2 border-[#e0d1ad] font-hylia">
+          <div class="info-card w-[45vw] mx-auto bg-[#150709] text-[#e0d1ad] rounded-3xl p-8 border-2 border-[#e0d1ad] font-hylia">
             <h2 class="text-3xl text-center mb-4">${selectedItem.name}</h2>
-            <img src="${selectedItem.image}" alt="${selectedItem.description}" class="object-contain w-full h-72 mx-auto mb-4" />
+            <img src="${selectedItem.image}" alt="${selectedItem.description}" class="object-contain w-[90%]" />
             <p class="text-lg">${selectedItem.description}</p>
-            <button class="go-back-btn text-black bg-white rounded-xl border-black border-2 transition-transform duration-300 hover:scale-110">Go Back</button>
+            <button class="go-back-btn text-black bg-white rounded-xl w-[4vw] border-black border-2 transition-transform duration-300 hover:scale-110">Go Back</button>
           </div>
           `
       );
