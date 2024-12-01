@@ -32,7 +32,7 @@ function addCards(data) {
         `
       <div class="card w-1/5 h-[22vw] bg-[#150709] rounded-3xl flex flex-col items-center justify-around m-8 border-2 border-[#e0d1ad] font-hylia">
             <h2 class="card-title text-2xl text-[#e0d1ad]">${obj.name}</h2>
-            <img src="${obj.image}" alt="${obj.description}" class="object-contain w-[65%]" />
+            <img src="${obj.image}" alt="${obj.name}, ${obj.category}, ${obj.common_locations}" class="object-contain w-[65%]" />
             <p class="text-base text-[#87a4b4]">${obj.id}</p>
             <button class="text-black bg-white rounded-xl w-[30%] border-black border-2 transition-transform duration-300 hover:scale-110" id="${obj.id}">Read More</button>
           </div>
