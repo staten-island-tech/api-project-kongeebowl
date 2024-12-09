@@ -15,7 +15,7 @@ async function getData() {
     }
   } catch (error) {
     console.log(error);
-    console.log("big fat error dzsljnc");
+    console.log("big fat error");
   }
 }
 
@@ -68,7 +68,6 @@ function infoCard(data) {
       document.querySelector(".go-back-btn").addEventListener("click", () => {
         clear();
         addCards(data);
-        infoCard(data);
       });
     }
   });
