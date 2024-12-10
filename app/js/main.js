@@ -14,8 +14,7 @@ async function getData() {
       infoCard(data);
     }
   } catch (error) {
-    console.log(error);
-    console.log("big fat error");
+    alert("big fat error");
   }
 }
 
